@@ -20,8 +20,7 @@ public class StartStopFootballMatch implements IStartMatch,  IStopMatch {
 
 	@Override
 	public void finishGame(Map<String, ScoreBoard> scoreBoard, String matchId) {
-		// TODO Auto-generated method stub
-		
+		scoreBoard.remove(matchId);
 	}
 
 }
