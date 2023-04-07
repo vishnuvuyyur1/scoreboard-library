@@ -11,4 +11,5 @@ public class ScoreBoard {
 	Team awayTeam;
 	int awayTeamScore;
 	long startTime;
+	int totalScore;
 }
