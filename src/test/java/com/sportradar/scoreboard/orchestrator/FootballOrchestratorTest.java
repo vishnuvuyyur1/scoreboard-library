@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.sportradar.scoreboard.football.GetFootBallMatch;
 import com.sportradar.scoreboard.football.StartStopFootballMatch;
@@ -21,6 +23,7 @@ import com.sportradar.scoreboard.model.ScoreBoard;
 import com.sportradar.scoreboard.model.Team;
 import com.sportradar.scoreboard.testdata.ScoreBoardTestData;
 
+@ExtendWith(MockitoExtension.class)
 public class FootballOrchestratorTest {
 	@InjectMocks
 	private FootballOrchestrator footballOrchestrator;
