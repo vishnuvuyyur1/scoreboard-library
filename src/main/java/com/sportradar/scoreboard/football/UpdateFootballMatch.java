@@ -9,8 +9,17 @@ public class UpdateFootballMatch implements IUpdateMatch {
 
 	@Override
 	public void updateScores(Map<String, ScoreBoard> scoreBoard, String matchId, int homeTeamScore, int awayTeamScore) {
-		// TODO Auto-generated method stub
-		
+		updateScoresForOneMatch(scoreBoard.get(matchId), homeTeamScore, awayTeamScore);
+	}
+
+	private void updateScoresForOneMatch(ScoreBoard scoreBoard, int homeTeamScore, int awayTeamScore) {
+		if (scoreBoard != null) {
+			scoreBoard.setHomeTeamScore(homeTeamScore);
+			scoreBoard.setAwayTeamScore(awayTeamScore);
+			scoreBoard.setTotalScore(homeTeamScore + awayTeamScore);
+		} else {
+			throw new IllegalArgumentException("Invalid Match Id");
+		}
 	}
 
 }

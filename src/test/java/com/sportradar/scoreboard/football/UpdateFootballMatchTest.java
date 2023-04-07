@@ -1,6 +1,7 @@
 package com.sportradar.scoreboard.football;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map;
 
@@ -26,5 +27,14 @@ public class UpdateFootballMatchTest {
 		updateFootballMatch.updateScores(scoreBoard, "match1", 2, 3);
 		assertEquals(5, scoreBoard.get("match1").getTotalScore());
 		assertEquals(3, scoreBoard.get("match1").getAwayTeamScore());
+	}
+	
+	@Test
+	void testUpdateScoresException() {
+		Map<String, ScoreBoard> scoreBoard = ScoreBoardTestData.getScoreBoard();
+		IllegalArgumentException thrown	= assertThrows(IllegalArgumentException.class, () -> {
+			updateFootballMatch.updateScores(scoreBoard, "match3", 2, 3);
+		});
+		assertEquals("Invalid Match Id", thrown.getMessage());
 	}
 }
