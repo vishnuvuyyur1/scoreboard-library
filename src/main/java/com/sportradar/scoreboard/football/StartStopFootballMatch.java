@@ -7,11 +7,14 @@ import com.sportradar.scoreboard.model.Team;
 import com.sportradar.scoreboard.operations.IStartMatch;
 
 public class StartStopFootballMatch implements IStartMatch {
+	private static final int INITIAL_SCORES = 0;
 
 	@Override
 	public String startGame(Map<String, ScoreBoard> scoreBoard, Team homeTeam, Team awayTeam) {
-		// TODO Auto-generated method stub
-		return null;
+		String matchId = homeTeam.toString() + awayTeam.toString();
+		scoreBoard.put(matchId, ScoreBoard.builder().homeTeam(homeTeam).homeTeamScore(INITIAL_SCORES).awayTeam(awayTeam)
+				.awayTeamScore(INITIAL_SCORES).startTime(System.currentTimeMillis()).build());
+		return matchId;
 	}
 
 }
