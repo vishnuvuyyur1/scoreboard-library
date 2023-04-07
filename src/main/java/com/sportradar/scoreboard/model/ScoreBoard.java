@@ -12,4 +12,8 @@ public class ScoreBoard {
 	int awayTeamScore;
 	long startTime;
 	int totalScore;
+	
+	public String toString() {
+		return homeTeam + " " + homeTeamScore + " - " + awayTeam + " " + awayTeamScore;
+	}
 }

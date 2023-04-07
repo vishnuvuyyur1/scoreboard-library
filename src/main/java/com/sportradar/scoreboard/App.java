@@ -21,7 +21,9 @@ public class App {
 		orc.updateScores(orc.startNewGame(Team.Uruguay, Team.Italy), 6, 6);
 		orc.updateScores(orc.startNewGame(Team.Argentina, Team.Australia), 3, 1);
 		orc.getGames().stream().forEach(score -> LOGGER.info(score.toString()));
-
+		
+		LOGGER.info("------------New Test case ------------");
+		
 		// Test case 2
 		orc.updateScores(orc.startNewGame(Team.Germany, Team.Spain), 2, 5);
 		orc.updateScores(orc.startNewGame(Team.Argentina, Team.Brazil), 1, 9);
