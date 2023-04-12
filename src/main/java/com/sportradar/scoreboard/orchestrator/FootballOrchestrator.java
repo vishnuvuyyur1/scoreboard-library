@@ -4,33 +4,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sportradar.scoreboard.football.GetFootBallMatch;
-import com.sportradar.scoreboard.football.StartStopFootballMatch;
-import com.sportradar.scoreboard.football.UpdateFootballMatch;
 import com.sportradar.scoreboard.model.ScoreBoard;
 import com.sportradar.scoreboard.model.Team;
+import com.sportradar.scoreboard.operations.IGetMatch;
+import com.sportradar.scoreboard.operations.IStartMatch;
+import com.sportradar.scoreboard.operations.IStopMatch;
+import com.sportradar.scoreboard.operations.IUpdateMatch;
 
 public class FootballOrchestrator {
 	private Map<String, ScoreBoard> footballScoreBoard;
-	private final GetFootBallMatch getFootBall;
-	private final StartStopFootballMatch startStopFootball;
-	private final UpdateFootballMatch updateFootball;
+	private final IGetMatch getFootBall;
+	private final IStartMatch startFootball;
+	private final IStopMatch stopFootball;
+	private final IUpdateMatch updateFootball;
 
-	public FootballOrchestrator(GetFootBallMatch getFootBall, StartStopFootballMatch startStopFootball,
-			UpdateFootballMatch updateFootball) {
+	public FootballOrchestrator(IGetMatch getFootBall, IStartMatch startFootball, IStopMatch stopFootball,
+			IUpdateMatch updateFootball) {
 		this.getFootBall = getFootBall;
-		this.startStopFootball = startStopFootball;
+		this.startFootball = startFootball;
+		this.stopFootball = stopFootball;
 		this.updateFootball = updateFootball;
 		this.footballScoreBoard = new HashMap<>();
 		;
 	}
 
 	public String startNewGame(Team homeTeam, Team awayTeam) {
-		return startStopFootball.startGame(this.footballScoreBoard, homeTeam, awayTeam);
+		return startFootball.startGame(this.footballScoreBoard, homeTeam, awayTeam);
 	}
 
 	public void stopGame(String matchId) {
-		startStopFootball.finishGame(this.footballScoreBoard, matchId);
+		stopFootball.finishGame(this.footballScoreBoard, matchId);
 	}
 
 	public void updateScores(String matchId, int homeTeamScore, int awayTeamScore) {

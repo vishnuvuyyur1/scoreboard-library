@@ -16,11 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.sportradar.scoreboard.football.GetFootBallMatch;
-import com.sportradar.scoreboard.football.StartStopFootballMatch;
-import com.sportradar.scoreboard.football.UpdateFootballMatch;
 import com.sportradar.scoreboard.model.ScoreBoard;
 import com.sportradar.scoreboard.model.Team;
+import com.sportradar.scoreboard.operations.IGetMatch;
+import com.sportradar.scoreboard.operations.IStartMatch;
+import com.sportradar.scoreboard.operations.IStopMatch;
+import com.sportradar.scoreboard.operations.IUpdateMatch;
 import com.sportradar.scoreboard.testdata.ScoreBoardTestData;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,15 +30,17 @@ public class FootballOrchestratorTest {
 	private FootballOrchestrator footballOrchestrator;
 
 	@Mock
-	private GetFootBallMatch getFootBall;
+	private IGetMatch getFootBall;
 	@Mock
-	private StartStopFootballMatch startStopFootball;
+	private  IStartMatch startFootball;
 	@Mock
-	private UpdateFootballMatch updateFootball;
+	private  IStopMatch stopFootball;
+	@Mock
+	private  IUpdateMatch updateFootball;
 
 	@Test
 	void testStartNewGame() {
-		when(startStopFootball.startGame(any(), any(), any())).thenReturn("match1");
+		when(startFootball.startGame(any(), any(), any())).thenReturn("match1");
 		String result = footballOrchestrator.startNewGame(Team.Argentina, Team.Australia);
 		assertEquals("match1", result);
 	}
@@ -46,7 +49,7 @@ public class FootballOrchestratorTest {
 	void testStopGame() {
 		Map<String, ScoreBoard> scoreBoard = new HashMap<>();
 		footballOrchestrator.stopGame("matchId");
-		verify(startStopFootball, times(1)).finishGame(scoreBoard, "matchId");
+		verify(stopFootball, times(1)).finishGame(scoreBoard, "matchId");
 	}
 	
 	@Test
